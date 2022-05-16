@@ -1,0 +1,51 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.hello {
+  color: blue;
+}
+
+form {
+  width : 500px;
+  margin: 0px auto;
+}
+
+.usernameSearch input, .usernameSearch button {
+  border: 0px;
+  padding: 10px;
+}
+
+.usernameSearch input {
+  border: 2px solid #fdfdfd;
+  display: inline-block;
+  margin-right: 20px;
+  border-radius: 12px;
+  width: 70%;
+}
+
+.usernameSearch button {
+  border-radius: 4px;
+  width: 80px;
+}
+
+#suggestions {
+  border: 1px dotted #ccc;
+  padding: 3px;
+  margin-top: 10px;
+}
+
+#suggestions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  padding-left: 22px;
+}
+#suggestions ul li {
+  padding: 5px 0;
+}
+#suggestions ul li:hover {
+  background: #eee;
+}
