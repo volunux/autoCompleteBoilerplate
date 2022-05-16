@@ -15,6 +15,7 @@ class UsernameAutoComplete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      'username': '',
       'usernames': [],
     };
     this.seeUsername = this.seeUsername.bind(this);
@@ -34,10 +35,10 @@ class UsernameAutoComplete extends React.Component {
      try {
        if (data && Array.isArray(data) && data.length > 0) {
 
-        let userRegExp = new RegExp(username, 'i');
+        let userRegExp = new RegExp('^' + username, 'i');
         let usernames = data.map((item) => { return item.username; });
         usernames = usernames.filter((name) => { if (name.match(userRegExp)) return name; });
-        this.setState({'usernames' : usernames});
+        this.setState({'usernames': usernames, 'username': username});
        }
      }
      catch (err) {
@@ -58,7 +59,7 @@ class UsernameAutoComplete extends React.Component {
       <input id="myInput" type="text" name="username" placeholder="Type something..........." onChange ={this.seeUsername} ref={this.myUsername}/>
       <button type="submit" onClick={(e) => e.preventDefault()}>Search</button>
         </div>
-      <UsernameList usernames ={this.state.usernames} itemClick={this.selectedUsername}/>
+      <UsernameList usernames ={this.state.usernames} itemClick={this.selectedUsername} choosenUsername={this.state.username}/>
       </form>
     )
   }
@@ -81,7 +82,7 @@ class UsernameList extends React.Component {
 
     if (usernames.length < 1) return null;
     const usernameListItems = usernames.map((username, idx) => {
-      return <UsernameItem username={username} key ={idx}/>
+      return <UsernameItem username={username} key ={idx} nameStr={this.props.choosenUsername}/>
     });
 
     return (<div id="suggestions">
@@ -94,7 +95,9 @@ class UsernameList extends React.Component {
 class UsernameItem extends React.Component {
 
   render() {
-    return (<li>{this.props.username}</li>)
+    let strLength = this.props.nameStr.length;
+    let str = (<b>{this.props.username.substring(0, strLength)}</b>);
+    return (<li>{str}{this.props.username.substring(strLength)}</li>)
   } 
 }
 
